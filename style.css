@@ -55,12 +55,12 @@ body {
 @media only screen and (max-width: 750px) {
 
 	.dot {
-	  width: 350px;
-	  height: 350px;
+	  width: 320px;
+	  height: 320px;
 	}
   
   .text {
-    font-size: 14pt;
+    font-size: 15pt;
     letter-spacing: 3pt;
   }
 
