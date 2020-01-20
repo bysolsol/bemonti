@@ -38,7 +38,7 @@ body {
 	top: 52%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-family: Helvetica, 'Open Sans', sans-serif;
   text-align: center;
   font-weight: medium;
   letter-spacing: 4pt;
