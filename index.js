@@ -1,64 +1,118 @@
+'use strict';
 
+{
+    window.onload = function () {
+        const canvas = document.querySelector('canvas');
+        if (typeof canvas.getContext === 'undefined') {
+            return;
+        }
+        const ctx = canvas.getContext("2d");
 
+        function fitCanvasSize() {
 
-/// SETTINGS ///
+            canvas.width = document.documentElement.clientWidth;
+            canvas.height = document.documentElement.clientHeight;
 
-var backgroundColor = "#FFFFFF";
-var dotColor = "#e1e5ab";
-var rbd = 4;  // rotation base duration for pulse arms
+        }
+        fitCanvasSize();
+        window.onresize = fitCanvasSize;
 
+        (function () {
+            var requestAnimationFrame = window.requestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.msRequestAnimationFrame;
+            window.requestAnimationFrame = requestAnimationFrame;
+        })();
 
+        var mouse = {
+            x: undefined,
+            y: undefined
+        }
 
-/// FUNCTIONS ///
+        if (window.matchMedia("(min-width: 400px)").matches) {
+            var maxRadius = 40;
+        } else {
+            var maxRadius = 24;
+        }
 
-//random integer
-function rib( min, max ) {
-  return Math.floor( Math.random() * ( Math.floor(max) - Math.ceil(min) + 1 ) ) + Math.ceil(min);
+        var colorArray = [
+            '#f6f4e6',
+            '#f6f4e6',
+            '#eef5b2',
+            '#fddb3a',
+            '#c2b0c9'
+        ]
+
+        window.addEventListener('mousemove',
+            function () {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            })
+
+        function Circle(x, y, dx, dy, radius) {
+            this.x = x;
+            this.y = y;
+            this.dx = dx;
+            this.dy = dy;
+            this.radius = radius;
+            this.minRadius = radius;
+            this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+            this.draw = function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            };
+
+            this.update = function () {
+
+                if (this.x + radius > canvas.width || this.x - radius < 0) {
+                    this.dx = -this.dx;
+                }
+                if (this.y + radius > canvas.height || this.y - radius < 0) {
+                    this.dy = -this.dy;
+                }
+
+                this.x += this.dx;
+                this.y += this.dy;
+
+                //interctivitity
+                if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+                    this.radius += 1;
+                    if (this.radius > maxRadius) {
+                        this.radius -= 1;
+                    }
+                } else if (this.radius > this.minRadius) {
+                    this.radius -= 1;
+                }
+
+                this.draw();
+
+            }
+        }
+
+        var circleArray = [];
+
+        for (var i = 0; i < 800; i++) {
+            var x = Math.random() * (canvas.width - radius * 2) + radius;
+            var dx = (Math.random() - 0.5);
+            var y = Math.random() * (canvas.height - radius * 2) + radius;
+            var dy = (Math.random() - 0.5);
+            var radius = Math.random() * 3 + 1;
+            circleArray.push(new Circle(x, y, dx, dy, radius));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < circleArray.length; i++) {
+                circleArray[i].update();
+            }
+
+        }
+        animate();
+    }
 }
-
-//places divs for liquid arms to swirl around base circle
-function placeLiquidArmDivs() {
-  for ( i=0; i<7; i++ ) {
-    var size = i == 6 ? 75 : rib(55,75);
-    $( ".dot" ).prepend( `<div class="arm-${i+1} arm" style="width:${size}%; height:${size}%"></div>` );
-  }
-}
-
-//liquifies dots
-function liquify() {
-    var le = Linear.easeNone;  // linear easing
-    TweenMax.to( ".text", 1.5, { opacity: 0} );
-    TweenMax.to( ".arm-1", rbd*0.7, { ease: le, rotation: "360", repeat: -1, transformOrigin: "50% 25%" });
-    TweenMax.to( ".arm-2", rbd*0.5, { ease: le, rotation: "-360", repeat: -1, transformOrigin: "72% 32%" });
-    TweenMax.to( ".arm-3", rbd*1.1, { ease: le, rotation: "360", repeat: -1, transformOrigin: "72% 63%" });
-    TweenMax.to( ".arm-4", rbd*0.6, { ease: le, rotation: "-360", repeat: -1, transformOrigin: "50% 75%" });
-    TweenMax.to( ".arm-5", rbd*0.8, { ease: le, rotation: "360", repeat: -1, transformOrigin: "28% 63%" });
-    TweenMax.to( ".arm-6", rbd*0.7, { ease: le, rotation: "-360", repeat: -1, transformOrigin: "28% 37%" });
-    TweenMax.to( ".arm-7", rbd*0.8, { ease: le, rotation: "360", repeat: -1, transformOrigin: "50% 60%", 
-      delay: 0.2 });
-}
-
-//re-solidifies dots
-function solidify() {
-  $( ".arm" ).each( ( i, arm )=> {
-    TweenMax.to( ".text", 4, { opacity: 1} );
-    if ( arm._gsTransform ) TweenMax.to( arm, rbd*0.5, { rotation: "0" } );
-    TweenMax.to( ".arm-7", rbd*0.5, { rotation: "0", delay: 0.2 } );
-  });
-}
-
-
-
-/// EVENTS ///
-
-$( ".dot" ).hover( ()=> { liquify() }, ()=> { solidify() } );
-
-
-
-/// EXECUTION ///
-
-$( ()=> { placeLiquidArmDivs() });
-
-
-
 
