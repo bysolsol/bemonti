@@ -1,81 +1,59 @@
-
-body {
-	margin: 0;
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    background: #f4fe8f;
 }
 
-.container {  
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+#wrap {
+    height: 100%;
+    width: 100%;
 }
 
-.dot {
-	position: absolute;
-	top: 50%;
+canvas {
+    display: block;
+    -webkit-filter: url("#goo");
+	filter: url("#goo");
+}
+.title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 1.2px;
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
+    z-index: 999;
+}
+
+.sub-title{
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    font-weight: normal;
+    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
+    z-index: 999;
+}
+
+
+
+  .footer {
+    position: absolute;
+	top: 96%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	border-radius: 100%;
-	filter: url( "#liquify" );
-	cursor: pointer;
-	width: 350px;
-	height: 350px;
-}
-
-.arm {
-	position: absolute;
-	width: 75%;
-	height: 75%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	border-radius: 100%;
-  background: #e1e5ab;
-}
-
-.text {
-  position: absolute;
-	top: 52%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-  font-family: Helvetica, 'Open Sans', sans-serif;
-  text-align: center;
-  font-weight: medium;
-  letter-spacing: 4pt;
-  line-height: 16pt;
-  font-size: 18pt;
-  color: #fff;
-}
-
-
-
-/* Responsive Styling */
-
-
-@media only screen and (max-width: 750px) {
-
-	.dot {
-	  width: 320px;
-	  height: 320px;
-	}
-  
-  .text {
-    font-size: 15pt;
-    letter-spacing: 3pt;
+    display: block;
+    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
+    text-align: center;
+    font-weight: medium;
+    font-size: 12px;
+    color: #000;
+    z-index: 999;
   }
-
-}
-
-@media only screen and (max-width: 375px) {
-
-	.dot {
-	  width: 150px;
-	  height: 150px;
-	}
-  
-  .text {
-    font-size: 9pt;
-    letter-spacing: 2pt;
-  }
-
-}
