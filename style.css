@@ -1,7 +1,4 @@
-*{
-	margin:0;
-	padding:0;
-}
+*{margin:0;padding:0;}
         html{
           font-size:14px;
         }
@@ -24,15 +21,17 @@
         p{
           font-weight:400;
           color:#000;
-          line-height: 1.6;
+          line-height: 1.8;
         }
 		.bg-rrrr{
 			background:#525659;
 		}
 
-
-  @media screen and (max-width 767px) {
-        .w-75 {
-            width: 100%!important;
+        .t-width {
+            width: 75%;
+        }
+        @media screen and (max-width:991px) {
+        .t-width {
+            width: 100%;
         }
     }
