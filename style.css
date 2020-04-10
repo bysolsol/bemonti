@@ -1,59 +1,31 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    width: 100%;
-    background: #f4fe8f;
+*{
+	margin:0;
+	padding:0;
 }
+        html{
+          font-size:14px;
+        }
+        body{
+          font-family: 'source-han-sans-korean', sans-serif;
+		  background:#F2F2F2;
 
-#wrap {
-    height: 100%;
-    width: 100%;
-}
-
-canvas {
-    display: block;
-    -webkit-filter: url("#goo");
-	filter: url("#goo");
-}
-.title{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 1.2px;
-    margin: 0;
-    font-size: 30px;
-    font-weight: bold;
-    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
-    z-index: 999;
-}
-
-.sub-title{
-    position: absolute;
-    top: 54%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    font-size: 14px;
-    letter-spacing: 1.4px;
-    font-weight: normal;
-    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
-    z-index: 999;
-}
-
-
-
-  .footer {
-    position: absolute;
-	top: 96%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-    display: block;
-    font-family: 'Spoqa Han Sans', Helvetica, sans-serif;
-    text-align: center;
-    font-weight: medium;
-    font-size: 12px;
-    color: #000;
-    z-index: 999;
-  }
+        }
+        .navbar-brand{
+          font-weight:600;
+          letter-spacing:1.8px;
+          font-size:24px;
+        }
+        tr{
+          border-top:1px solid #000;
+        }
+        tr:hover{
+          background:#E4E9BC;
+        }
+        p{
+          font-weight:400;
+          color:#000;
+          line-height: 1.6;
+        }
+		.bg-rrrr{
+			background:#525659;
+		}
