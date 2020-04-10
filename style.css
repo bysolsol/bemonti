@@ -29,3 +29,10 @@
 		.bg-rrrr{
 			background:#525659;
 		}
+
+
+  @media screen and (max-width 767px) {
+        .w-75 {
+            width: 100%!important;
+        }
+    }
